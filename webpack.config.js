@@ -24,7 +24,6 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     hot: true,
-    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -44,7 +43,7 @@ module.exports = {
         },
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(sc|sa|c)ss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
