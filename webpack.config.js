@@ -3,8 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-module.exports = {
-  mode: 'development',
+const config = {
   entry: {
     index: './src/index.js',
   },
@@ -20,7 +19,7 @@ module.exports = {
     minimize: true,
     minimizer: [new CssMinimizerPlugin()],
   },
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   devServer: {
     contentBase: './dist',
     hot: true,
@@ -52,4 +51,12 @@ module.exports = {
       },
     ],
   },
+};
+
+module.exports = (env, argv) => {
+  if (argv.mode === 'production') {
+    config.devtool = 'source-map';
+  }
+
+  return config;
 };
